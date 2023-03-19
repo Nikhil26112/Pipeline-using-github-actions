@@ -7,16 +7,16 @@ resource "aws_ecs_cluster" "my-cluster" {
 }
 
 resource "aws_ecs_task_definition" "my-task" {
-  family                   = "my-task"
-  container_definitions    = jsonencode([
+  family = "my-task"
+  container_definitions = jsonencode([
     {
-      name                  = "my-app"
-      image                 = "182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-express-app:latest"
-      portMappings          = [
+      name  = "my-app"
+      image = "182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-express-app:latest"
+      portMappings = [
         {
-          containerPort     = 3000
-          hostPort          = 0
-          protocol          = "tcp"
+          containerPort = 3000
+          hostPort      = 3000
+          protocol      = "tcp"
         }
       ]
     }
@@ -60,12 +60,13 @@ resource "aws_ecs_service" "my-service" {
   }
 
   load_balancer {
-    target_group_arn = "demo-tg"
+    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:182183907325:targetgroup/finaltg/99029c91dc813bac"
     container_name   = "my-app"
     container_port   = 3000
   }
 
   network_configuration {
-    security_groups = ["demo-sg"]
+    security_groups = ["sg-0b1c03b84be970a28"]
+    subnets         = ["subnet-0db72f817ecab42bd", "subnet-0ee400178514b6333"]
   }
 }
