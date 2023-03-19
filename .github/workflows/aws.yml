@@ -29,4 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.ECR_REPO_URI }}/${{ github.repository }}:latest
+          tags: ${{ secrets.ECR_REPO_URI }}/${{ github.repository }}
