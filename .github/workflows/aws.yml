@@ -23,10 +23,12 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build and push Docker image
+      - name: Build Docker image
         id: build-image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.ECR_REPO_URI }}/${{ github.repository }}
+        run: docker build -t 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo .
+
+      - name: Push Docker image to ECR
+        run: |
+          aws ecr --region us-east-1 | docker login -u AWS -p ${{ secrets.AUTH_TOKEN}} 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
+          docker tag 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
+          docker push 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
