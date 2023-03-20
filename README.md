@@ -1,6 +1,6 @@
-#Demo-Project
+# Demo-Project
 
-##Pre-requisites
+## Pre-requisites
 - AWS
 - ECR
 - ECS
