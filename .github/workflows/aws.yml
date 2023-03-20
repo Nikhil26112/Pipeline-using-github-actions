@@ -25,10 +25,10 @@ jobs:
 
       - name: Build Docker image
         id: build-image
-        run: docker build -t 941876206785.dkr.ecr.us-east-1.amazonaws.com/my-repo .
+        run: docker build -t 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo .
 
       - name: Push Docker image to ECR
         run: |
-          aws ecr --region us-east-1 | docker login -u AWS -p ${{ secrets.AUTH_TOKEN}} 941876206785.dkr.ecr.us-east-1.amazonaws.com/my-repo
-          docker tag 941876206785.dkr.ecr.us-east-1.amazonaws.com/my-repo 941876206785.dkr.ecr.us-east-1.amazonaws.com/my-repo
-          docker push 941876206785.dkr.ecr.us-east-1.amazonaws.com/my-repo
+          aws ecr --region us-east-1 | docker login -u AWS -p ${{ secrets.AUTH_TOKEN}} 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
+          docker tag 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
+          docker push 182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo
