@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "my-task" {
   container_definitions = jsonencode([
     {
       name  = "my-app"
-      image = "182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-express-app:latest"
+      image = "182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo/my-express-app:latest"
       portMappings = [
         {
           containerPort = 3000
@@ -60,7 +60,7 @@ resource "aws_ecs_service" "my-service" {
   }
 
   load_balancer {
-    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:182183907325.dkr.ecr.us-east-1.amazonaws.com/my-repo:targetgroup/finaltg/99029c91dc813bac"
+    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:182183907325:targetgroup/finaltg/99029c91dc813bac"
     container_name   = "my-app"
     container_port   = 3000
   }
