@@ -6,8 +6,8 @@ resource "aws_ecs_cluster" "my-cluster" {
   name = "my-cluster"
 }
 
-resource "aws_ecs_task_definition" "my-task" {
-  family = "my-task"
+resource "aws_ecs_task_definition" "demo-task-def" {
+  family = "demo-task-def"
   container_definitions = jsonencode([
     {
       name  = "my-app"
@@ -49,10 +49,10 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy_attach
   role       = aws_iam_role.ecs_task_execution_role.name
 }
 
-resource "aws_ecs_service" "my-service" {
-  name            = "my-service"
+resource "aws_ecs_service" "assessment-svc" {
+  name            = "assessment-svc"
   cluster         = aws_ecs_cluster.my-cluster.id
-  task_definition = aws_ecs_task_definition.my-task.arn
+  task_definition = aws_ecs_task_definition.demo-task-def.arn
   desired_count   = 1
 
   deployment_controller {
@@ -60,13 +60,13 @@ resource "aws_ecs_service" "my-service" {
   }
 
   load_balancer {
-    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:182183907325:targetgroup/finaltg/99029c91dc813bac"
+    target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:182183907325:targetgroup/assessment-tg/32cc6b0601d0f8cd"
     container_name   = "my-app"
     container_port   = 3000
   }
 
   network_configuration {
-    security_groups = ["sg-0b1c03b84be970a28"]
+    security_groups = ["sg-05064f0bf251ce9f8"]
     subnets         = ["subnet-0db72f817ecab42bd", "subnet-0ee400178514b6333"]
   }
 }
