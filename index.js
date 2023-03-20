@@ -3,7 +3,7 @@ var express = require('express');
 var app = module.exports = express()
 
 app.get('/', function (req, res) {
-    res.send('Hello Everyone From Nikhil Chauhan');
+    res.send('Hello World');
 });
 
 if (!module.parent) {
